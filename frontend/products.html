@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - Fashion Store</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">FASHION</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Catalogue</a>
+      <a href="#">Favourite</a>
+      <a href="#">Lifestyle</a>
+    </nav>
+    <a href="cart.html" class="cart-link">🛒 Cart (<span id="cart-count">0</span>)</a>
+  </header>
+
+  <section class="products">
+    <h2>Our Products</h2>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img src="images/pr-1.jpg" alt="Dress">
+        <h3>Red Dress</h3>
+        <p>$40</p>
+        <button onclick="addToCart('Red Dress', 40)">Add to Cart</button>
+        <a href="product.html">View Details</a>
+      </div>
+
+      <div class="product-card">
+        <img src="images/jacket1.jpg" alt="Jacket">
+        <h3>Pink Jacket</h3>
+        <p>$60</p>
+        <button onclick="addToCart('Pink Jacket', 60)">Add to Cart</button>
+        <a href="product.html">View Details</a>
+      </div>
+
+      <div class="product-card">
+        <img src="images/shirt1.jpg" alt="Shirt">
+        <h3>Striped Shirt</h3>
+        <p>$25</p>
+        <button onclick="addToCart('Striped Shirt', 25)">Add to Cart</button>
+        <a href="product.html">View Details</a>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

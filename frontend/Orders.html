@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders - Fashion Store</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">FASHION</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Catalogue</a>
+      <a href="cart.html">Cart</a>
+      <a href="orders.html">My Orders</a>
+    </nav>
+    <div class="user-menu">
+      <span id="user-name">Welcome, User!</span>
+      <a href="login.html" onclick="logout()">Logout</a>
+    </div>
+  </header>
+
+  <section class="orders-section">
+    <div class="orders-container">
+      <h2>My Orders</h2>
+      <div id="orders-list" class="orders-list">
+         Orders will be populated by JavaScript 
+      </div>
+    </div>
+  </section>
+
+  <script src="orders.js"></script>
+</body>
+</html>
