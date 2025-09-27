@@ -2,16 +2,19 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require("../config");
 const User = require("../models/User");
+require("dotenv").config();  // Load .env
 
 // Register
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    if(!name || !email || !password) return res.status(400).json({ message: "Missing fields" });
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "Missing fields" });
+    }
+
     let user = await User.findOne({ email });
-    if(user) return res.status(400).json({ message: "Email already used" });
+    if (user) return res.status(400).json({ message: "Email already used" });
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
@@ -19,9 +22,17 @@ router.post("/register", async (req, res) => {
     user = new User({ name, email, passwordHash: hash });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, config.jwtSecret, { expiresIn: "7d" });
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email }});
-  } catch(err) {
+    const token = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET,   // ✅ use env variable
+      { expiresIn: "7d" }
+    );
+
+    res.json({
+      token,
+      user: { id: user._id, name: user.name, email: user.email },
+    });
+  } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
@@ -32,14 +43,22 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if(!user) return res.status(400).json({ message: "Invalid credentials" });
+    if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
     const match = await bcrypt.compare(password, user.passwordHash);
-    if(!match) return res.status(400).json({ message: "Invalid credentials" });
+    if (!match) return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user._id }, config.jwtSecret, { expiresIn: "7d" });
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email }});
-  } catch(err) {
+    const token = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET,   // ✅ use env variable
+      { expiresIn: "7d" }
+    );
+
+    res.json({
+      token,
+      user: { id: user._id, name: user.name, email: user.email },
+    });
+  } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }

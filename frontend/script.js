@@ -55,3 +55,73 @@ function checkout() {
 // Initialize
 updateCartCount()
 displayCart()
+// Fetch all products from backend and display
+async function loadProducts() {
+  try {
+    const res = await fetch("http://localhost:5000/api/products");
+    const products = await res.json();
+
+    const section = document.querySelector(".product-details");
+    section.innerHTML = ""; // clear old content
+
+    products.forEach(product => {
+      const div = document.createElement("div");
+      div.classList.add("details");
+
+      div.innerHTML = `
+        <img src="${product.image}" alt="${product.title}">
+        <h2>${product.title}</h2>
+        <p>Price: $${product.price}</p>
+        <p>${product.description}</p>
+        <button onclick="addToCart('${product.title}', ${product.price})">Add to Cart</button>
+      `;
+      section.appendChild(div);
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// Call the function on page load
+loadProducts();
+
+// Example addToCart function
+function addToCart(title, price) {
+  alert(`${title} added to cart!`);
+}
+const productsContainer = document.querySelector('.products-scroll');
+
+// Fetch products from backend
+async function fetchProducts() {
+  try {
+    const res = await fetch('http://localhost:5000/api/products'); // your backend endpoint
+    const products = await res.json();
+
+    productsContainer.innerHTML = ''; // clear existing content
+
+    products.forEach(product => {
+      const card = document.createElement('div');
+      card.classList.add('product-card');
+      card.innerHTML = `
+        <div class="product-image">
+          <img src="${product.image}" alt="${product.title}">
+        </div>
+        <div class="product-info">
+          <h3>${product.title}</h3>
+          <p class="product-price">$${product.price}</p>
+          <button class="explore-btn" onclick="viewProduct('${product._id}')">Explore Now!</button>
+        </div>
+      `;
+      productsContainer.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Error fetching products:', err);
+  }
+}
+
+// Redirect to product details page
+function viewProduct(id) {
+  window.location.href = `products.html?id=${id}`;
+}
+
+fetchProducts();

@@ -3,32 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Orders - Fashion Store</title>
+  <title>My Orders - FATUSH STYLES</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">FASHION</div>
+ <!-- Navbar -->
+   <header class="navbar">
+    <div class="logo">FATUSH <span>STYLES</span></div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Catalogue</a>
-      <a href="cart.html">Cart</a>
-      <a href="orders.html">My Orders</a>
+      <a href="index.html">HOME</a>
+      <a href="products.html">PRODUCTS</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT US</a>
     </nav>
-    <div class="user-menu">
-      <span id="user-name">Welcome, User!</span>
-      <a href="login.html" onclick="logout()">Logout</a>
-    </div>
+    <button class="signup-btn" onclick="location.href='register.html'">SIGN UP</button>
+     <button class="login-btn" onclick="location.href='login.html'">LOGIN</button>
+
+    <a href="cart.html" class="cart-link">🛒 Cart (<span id="cart-count">0</span>)</a>
   </header>
 
-  <section class="orders-section">
-    <div class="orders-container">
-      <h2>My Orders</h2>
-      <div id="orders-list" class="orders-list">
-         Orders will be populated by JavaScript 
+  <main>
+    <section class="orders-section">
+      <div class="container">
+        <h2 class="section-title">My Orders</h2>
+        <div id="orders-list">
+          <div class="loading">Loading orders...</div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <script src="orders.js"></script>
 </body>

@@ -1,69 +1,68 @@
-// Authentication functionality
-function handleLogin(event) {
-  event.preventDefault()
+// REGISTER function
+async function handleRegister(e) {
+  e.preventDefault();
 
-  const email = document.getElementById("email").value
-  const password = document.getElementById("password").value
-
-  // Simulate login (in real app, this would call your backend API)
-  if (email && password) {
-    const user = {
-      name: email.split("@")[0],
-      email: email,
-      isAdmin: false,
-    }
-
-    localStorage.setItem("user", JSON.stringify(user))
-    alert("Login successful!")
-    window.location.href = "index.html"
-  } else {
-    alert("Please fill in all fields")
-  }
-}
-
-function handleRegister(event) {
-  event.preventDefault()
-
-  const name = document.getElementById("name").value
-  const email = document.getElementById("email").value
-  const password = document.getElementById("password").value
-  const confirmPassword = document.getElementById("confirmPassword").value
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
   if (password !== confirmPassword) {
-    alert("Passwords do not match")
-    return
+    return alert("Passwords do not match!");
   }
 
-  if (name && email && password) {
-    const user = {
-      name: name,
-      email: email,
-      isAdmin: false,
-    }
+  try {
+    const res = await fetch("http://localhost:5000/api/users/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
 
-    localStorage.setItem("user", JSON.stringify(user))
-    alert("Registration successful!")
-    window.location.href = "index.html"
-  } else {
-    alert("Please fill in all fields")
-  }
-}
+    const data = await res.json();
 
-function logout() {
-  localStorage.removeItem("user")
-  window.location.href = "login.html"
-}
+    if (!res.ok) throw new Error(data.message);
 
-// Check if user is logged in
-function checkAuth() {
-  const user = JSON.parse(localStorage.getItem("user"))
-  if (user) {
-    const userNameElement = document.getElementById("user-name")
-    if (userNameElement) {
-      userNameElement.textContent = `Welcome, ${user.name}!`
-    }
+    // ✅ Personalized success alert
+    alert(`User created successfully! Welcome, ${data.user.name} 🎉`);
+
+    // Redirect to login page
+    window.location.href = "login.html";
+  } catch (err) {
+    alert(err.message);
   }
 }
 
-// Initialize auth check
-document.addEventListener("DOMContentLoaded", checkAuth)
+// LOGIN function
+async function handleLogin(e) {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    const res = await fetch("http://localhost:5000/api/users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message);
+
+    // Save JWT + user info
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    // ✅ Personalized login alert
+    alert(`Welcome back, ${data.user.name}! 🎉`);
+
+    // Redirect to home page
+    window.location.href = "index.html";
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+// Attach these functions to form submit events
+document.getElementById("registerForm")?.addEventListener("submit", handleRegister);
+document.getElementById("loginForm")?.addEventListener("submit", handleLogin);

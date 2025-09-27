@@ -3,53 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products - Fashion Store</title>
+  <title>All Products - FATUSH STYLES</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <header>
-    <div class="logo">FASHION</div>
+   <!-- Navbar -->
+   <header class="navbar">
+    <div class="logo">FATUSH <span>STYLES</span></div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Catalogue</a>
-      <a href="#">Favourite</a>
-      <a href="#">Lifestyle</a>
+      <a href="index.html">HOME</a>
+      <a href="products.html">PRODUCTS</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT US</a>
     </nav>
+    <button class="signup-btn" onclick="location.href='register.html'">SIGN UP</button>
+     <button class="login-btn" onclick="location.href='login.html'">LOGIN</button>
+
     <a href="cart.html" class="cart-link">🛒 Cart (<span id="cart-count">0</span>)</a>
   </header>
 
-  <section class="products">
-    <h2>Our Products</h2>
-    <div class="product-grid">
+  <main>
+    <section class="all-products">
+      <h2>All Products</h2>
+      <div class="products-grid" id="products-grid"></div>
+    </section>
+  </main>
 
-      <div class="product-card">
-        <img src="images/pr-1.jpg" alt="Dress">
-        <h3>Red Dress</h3>
-        <p>$40</p>
-        <button onclick="addToCart('Red Dress', 40)">Add to Cart</button>
-        <a href="product.html">View Details</a>
-      </div>
+  <script>
+    const products = [
+      { title: "Hoodies & Sweatshirt", price: 45.99, img: "images/fa-a.png" },
+      { title: "Coats & Parkas", price: 89.99, img: "images/fa-p.jpg" },
+      { title: "Tees & T-Shirt", price: 24.99, img: "images/fa-g.jpg" },
+      { title: "Elegant Dresses", price: 79.99, img: "images/fa-u.jpg" },
+      { title: "Denim & Jeans", price: 59.99, img: "images/fa-i.jpg" },
+      { title: "Leather Jackets", price: 129.99, img: "images/fa-h.jpg" },
+      { title: "Summer Shorts", price: 34.99, img: "images/fa-r.jpg" }
+    ];
 
-      <div class="product-card">
-        <img src="images/jacket1.jpg" alt="Jacket">
-        <h3>Pink Jacket</h3>
-        <p>$60</p>
-        <button onclick="addToCart('Pink Jacket', 60)">Add to Cart</button>
-        <a href="product.html">View Details</a>
-      </div>
-
-      <div class="product-card">
-        <img src="images/shirt1.jpg" alt="Shirt">
-        <h3>Striped Shirt</h3>
-        <p>$25</p>
-        <button onclick="addToCart('Striped Shirt', 25)">Add to Cart</button>
-        <a href="product.html">View Details</a>
-      </div>
-
-    </div>
-  </section>
-
-  <script src="script.js"></script>
+    const grid = document.getElementById('products-grid');
+    products.forEach((product, index) => {
+      const card = document.createElement('div');
+      card.classList.add('product-card');
+      card.innerHTML = `
+        <div class="product-image">
+          <img src="${product.img}" alt="${product.title}">
+        </div>
+        <div class="product-info">
+          <h3>${product.title}</h3>
+          <p class="product-price">$${product.price}</p>
+          <button onclick="location.href='product.html?id=${index}'">Explore Now!</button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
 </body>
 </html>

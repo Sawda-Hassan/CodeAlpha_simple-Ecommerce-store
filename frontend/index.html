@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fashion Store</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+  .logo { color: black !important; }
+  .logo span { color: #f9e65c !important; }
+</style>
 </head>
 <body>
 
@@ -13,12 +17,14 @@
     <div class="logo">FATUSH <span>STYLES</span></div>
     <nav>
       <a href="#">FASHION</a>
-      <a href="index.html">PRODUCTS</a>
+      <a href="products.html">PRODUCTS</a>
       <a href="about.html">ABOUT</a>
-      <a href="contact.html">CONTACT US <link rel="stylesheet" href="/frontend/contact.html"></a>
+      <a href="contact.html">CONTACT US</a>
     </nav>
     <button class="signup-btn" onclick="location.href='register.html'">SIGN UP</button>
+     <button class="login-btn" onclick="location.href='login.html'">LOGIN</button>
 
+    <a href="cart.html" class="cart-link">🛒 Cart (<span id="cart-count">0</span>)</a>
   </header>
 
   <!-- Hero Section -->
@@ -31,7 +37,7 @@
         CLOTHES.
       </h1>
       <p>Live for Influential and Innovative fashion!</p>
-      <button class="shop-btn">Shop Now</button>
+      <button class="shop-btn" onclick="location.href='products.html'">Shop Now</button>
     </div>
 
     <div class="hero-img">
@@ -39,96 +45,13 @@
     </div>
   </section>
 
-  <!-- NEW ARRIVALS products section -->
+  <!-- Products Section (from products.html) -->
   <section class="new-arrivals">
     <div class="arrivals-container">
       <h2 class="arrivals-title">NEW ARRIVALS</h2>
-      <!-- Expanded to 10 products with horizontal scrolling -->
       <div class="products-scroll-container">
-        <div class="products-scroll">
-          <div class="product-card">
-            <div class="product-image">
-              <img src="images/fa-a.png" alt="Woman in orange hoodie">
-            </div>
-            <div class="product-info">
-              <h3>Hoodies & Sweatshirt</h3>
-              <p class="product-price">$45.99</p>
-              <button class="explore-btn">Explore Now!</button>
-            </div>
-          </div>
-          
-          <div class="product-card">
-            <div class="product-image">
-              <img src="images/fa-p.jpg" alt="Woman in purple coat">
-            </div>
-            <div class="product-info">
-              <h3>Coats & Parkas</h3>
-              <p class="product-price">$89.99</p>
-              <button class="explore-btn">Explore Now!</button>
-            </div>
-          </div>
-          
-          <div class="product-card">
-            <div class="product-image">
-              <img src="images/fa-g.jpg" alt="Woman in white t-shirt">
-            </div>
-            <div class="product-info">
-              <h3>Tees & T-Shirt</h3>
-              <p class="product-price">$24.99</p>
-              <button class="explore-btn">Explore Now!</button>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-image">
-              <img src="images/fa-u.jpg" alt="Black dress">
-            </div>
-            <div class="product-info">
-              <h3>Elegant Dresses</h3>
-              <p class="product-price">$79.99</p>
-              <button class="explore-btn">Explore Now!</button>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-image">
-              <img src="images/fa-i.jpg" alt="Denim jeans">
-            </div>
-            <div class="product-info">
-              <h3>Denim & Jeans</h3>
-              <p class="product-price">$59.99</p>
-              <button class="explore-btn">Explore Now!</button>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-image">
-              <img src="images/fa-h.jpg" alt="Leather jacket">
-            </div>
-            <div class="product-info">
-              <h3>Leather Jackets</h3>
-              <p class="product-price">$129.99</p>
-              <button class="explore-btn">Explore Now!</button>
-            </div>
-          </div>
-
-          <div class="product-card">
-            <div class="product-image">
-              <img src="images/fa-r.jpg" alt="Summer shorts">
-            </div>
-            <div class="product-info">
-              <h3>Summer Shorts</h3>
-              <p class="product-price">$34.99</p>
-              <button class="explore-btn">Explore Now!</button>
-            </div>
-          </div>
-
-         
-         
-
-        
-          
-          </div>
+        <div class="products-scroll" id="products-list">
+          <!-- Products will render here from JS -->
         </div>
       </div>
     </div>
@@ -144,7 +67,7 @@
           <strong>1 June - 10 June 2021</strong><br>
           <small>*Terms & Conditions apply</small>
         </div>
-        <button class="shop-now-btn">SHOP NOW</button>
+        <button class="shop-now-btn" onclick="location.href='products.html'">SHOP NOW</button>
       </div>
       <div class="sale-image">
         <img src="images/fa-8.png" alt="Woman in yellow outfit">
@@ -182,6 +105,7 @@
   </section>
 
   <!-- Footer Section -->
+
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-section">
@@ -198,8 +122,8 @@
       <div class="footer-section">
         <h4>Company</h4>
         <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact us</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact us</a></li>
           <li><a href="#">Support</a></li>
           <li><a href="#">Careers</a></li>
         </ul>
@@ -208,7 +132,7 @@
       <div class="footer-section">
         <h4>Quick Link</h4>
         <ul>
-          <li><a href="#">Mogadisho ,somalia</a></li>
+          <li><a href="#">Share Location</a></li>
           <li><a href="#">Orders Tracking</a></li>
           <li><a href="#">Size Guide</a></li>
           <li><a href="#">FAQs</a></li>
@@ -224,6 +148,45 @@
       </div>
     </div>
   </footer>
+
+<script>
+  // Products array
+  const products = [
+    { title: "Hoodies & Sweatshirt", price: 45.99, img: "images/fa-a.png" },
+    { title: "Coats & Parkas", price: 89.99, img: "images/fa-p.jpg" },
+    { title: "Tees & T-Shirt", price: 24.99, img: "images/fa-g.jpg" },
+    { title: "Elegant Dresses", price: 79.99, img: "images/fa-u.jpg" },
+    { title: "Denim & Jeans", price: 59.99, img: "images/fa-i.jpg" },
+    { title: "Leather Jackets", price: 129.99, img: "images/fa-h.jpg" },
+    { title: "Summer Shorts", price: 34.99, img: "images/fa-r.jpg" }
+  ];
+
+  const productsList = document.getElementById('products-list');
+
+  products.forEach((product, index) => {
+    const card = document.createElement('div');
+    card.classList.add('product-card');
+    card.innerHTML = `
+      <div class="product-image">
+        <img src="${product.img}" alt="${product.title}">
+      </div>
+      <div class="product-info">
+        <h3>${product.title}</h3>
+        <p class="product-price">$${product.price}</p>
+        <button class="explore-btn" onclick="location.href='product.html?id=${index}'">Explore Now!</button>
+      </div>
+    `;
+    productsList.appendChild(card);
+  });
+
+  // Cart count
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("fashionCart")) || [];
+    document.querySelectorAll('.cart-link').forEach(el => el.textContent = `🛒 Cart (${cart.length})`);
+  }
+  updateCartCount();
+</script>
+
 
 </body>
 </html>

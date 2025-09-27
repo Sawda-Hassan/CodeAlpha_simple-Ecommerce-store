@@ -4,31 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Details - Fashion Store</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <header>
-    <div class="logo">FASHION</div>
+  <!-- Header -->
+ 
+ <!-- Navbar -->
+ <!-- Navbar -->
+ <header class="navbar">
+    <div class="logo">FATUSH <span>STYLES</span></div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Catalogue</a>
-      <a href="#">Favourite</a>
-      <a href="#">Lifestyle</a>
+      <a href="index.html">HOME</a>
+      <a href="products.html">PRODUCTS</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT US</a>
     </nav>
+    <button class="signup-btn" onclick="location.href='register.html'">SIGN UP</button>
+     <button class="login-btn" onclick="location.href='login.html'">LOGIN</button>
+
     <a href="cart.html" class="cart-link">🛒 Cart (<span id="cart-count">0</span>)</a>
   </header>
 
+
+  <!-- Product Details Section -->
   <section class="product-details">
-    <img src="images/dress1.jpg" alt="Red Dress">
+    <div class="product-image">
+      <img id="product-img" src="" alt="Product Image">
+    </div>
     <div class="details">
-      <h2>Red Dress</h2>
-      <p>Price: $40</p>
-      <p>Beautiful stylish red dress for all occasions.</p>
-      <button onclick="addToCart('Red Dress', 40)">Add to Cart</button>
+      <h2 id="product-title"></h2>
+      <p>Price: $<span id="product-price"></span></p>
+      <p id="product-desc"></p>
+      <button id="add-cart-btn">Add to Cart</button>
     </div>
   </section>
 
-  <script src="script.js"></script>
+  <script>
+    // Products array (same as index.html)
+    const products = [
+      { title: "Hoodies & Sweatshirt", price: 45.99, img: "images/fa-a.png", desc: "Comfortable and stylish hoodies for all seasons." },
+      { title: "Coats & Parkas", price: 89.99, img: "images/fa-p.jpg", desc: "Warm and elegant coats & parkas." },
+      { title: "Tees & T-Shirt", price: 24.99, img: "images/fa-g.jpg", desc: "Casual and trendy t-shirts for everyday wear." },
+      { title: "Elegant Dresses", price: 79.99, img: "images/fa-u.jpg", desc: "Beautiful elegant dresses for special occasions." },
+      { title: "Denim & Jeans", price: 59.99, img: "images/fa-i.jpg", desc: "Classic denim and jeans for all styles." },
+      { title: "Leather Jackets", price: 129.99, img: "images/fa-h.jpg", desc: "Premium leather jackets to elevate your look." },
+      { title: "Summer Shorts", price: 34.99, img: "images/fa-r.jpg", desc: "Light and comfortable summer shorts." }
+    ];
+
+    // Get product ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const productId = parseInt(params.get('id')) || 0; // default to 0 if no id
+
+    const product = products[productId];
+
+    // Render product details
+    document.getElementById('product-img').src = product.img;
+    document.getElementById('product-img').alt = product.title;
+    document.getElementById('product-title').textContent = product.title;
+    document.getElementById('product-price').textContent = product.price;
+    document.getElementById('product-desc').textContent = product.desc;
+
+    // Add to Cart function
+    const addCartBtn = document.getElementById('add-cart-btn');
+    addCartBtn.addEventListener('click', () => {
+      const cart = JSON.parse(localStorage.getItem("fashionCart")) || [];
+      cart.push(product);
+      localStorage.setItem("fashionCart", JSON.stringify(cart));
+      updateCartCount();
+      alert(product.title + " added to cart!");
+    });
+
+    // Update cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("fashionCart")) || [];
+      document.querySelectorAll('.cart-link').forEach(el => el.textContent = `🛒 Cart (${cart.length})`);
+    }
+    updateCartCount();
+  </script>
+  
+
 </body>
 </html>

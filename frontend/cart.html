@@ -4,16 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shopping Cart - Fashion Store</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <header>
-    <div class="logo">FASHION</div>
+   <!-- Navbar -->
+   <header class="navbar">
+    <div class="logo">FATUSH <span>STYLES</span></div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Catalogue</a>
+      <a href="index.html">HOME</a>
+      <a href="products.html">PRODUCTS</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT US</a>
     </nav>
+    <button class="signup-btn" onclick="location.href='register.html'">SIGN UP</button>
+     <button class="login-btn" onclick="location.href='login.html'">LOGIN</button>
+
+    <a href="cart.html" class="cart-link">🛒 Cart (<span id="cart-count">0</span>)</a>
   </header>
 
   <section class="cart">
@@ -23,6 +30,6 @@
     <button onclick="checkout()">Checkout</button>
   </section>
 
-  <script src="script.js"></script>
+  <script src="Cart.js"></script>
 </body>
 </html>
